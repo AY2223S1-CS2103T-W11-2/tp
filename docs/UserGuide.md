@@ -3,7 +3,8 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+ProfNUS is a desktop application which helps SOC Professors who have many modules with many students/TAs to manage. 
+It is optimized for users who prefer CLI over GUI so that frequent tasks can be done faster by typing in commands.
 
 * Table of Contents
 {:toc}
@@ -14,7 +15,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `ProfNUS.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -24,13 +25,13 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`list`** : Lists all students contact information.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a student named `John Doe` to the Address Book.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`delete`**`3` : Deletes the 3rd student shown in the current list.
 
-   * **`clear`** : Deletes all contacts.
+   * **`clear`** : Deletes all students.
 
    * **`exit`** : Exits the app.
 
@@ -73,74 +74,125 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a student: `addstu`
 
-Adds a person to the address book.
+Adds a student to a module, with their respective contact information
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] [m/MODULE]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A student can have any number of tags (including 0)
 </div>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Adam Doink t/TA e/ad4md01nk@example.com a/Kent Ridge Hall p/1234567 m/CS1101S`
 
-### Listing all persons : `list`
+![add-stu](images/userguide/addstu.png)
 
-Shows a list of all persons in the address book.
+### Listing all students : `list`
 
-Format: `list`
+Shows a list of all the students in the module with their contact information in the application.
 
-### Editing a person : `edit`
+Format: `list MODULE_NAME [MORE_MODULE_NAMES]`
+- The module name is case-insensitive. e.g CS1101S will match cs1101s
+- Students matching at least one module will be returned
+- Only exact module matches will be returned. e.g. CS1231 will not match CS1231S
 
-Edits an existing person in the address book.
+Examples:
+- `list CS1101S returns` Alex Yeoh and Bernice Yu
+- `list CS1101S CS1231S` returns Bernice Yu only`
+
+![list](images/userguide/list.png)
+
+### Viewing list of modules : `mlist`
+
+Shows a list of all the modules.
+
+Format: `mlist`
+
+Example:
+
+![mlist](images/userguide/mlist.png)
+
+### Editing a student : `edit`
+
+Edits an existing student in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
+* You can remove all the student’s tags by typing `t/` without
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Find a student: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds a student based on some keywords, with all information showing up.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Keyword  person can have any number of tags or modules (including 0)
+
+:bulb: **Tip:**
+The result is a list of persons which keywords matching with their name, phone number or email.
+</div>
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find Adam Do`
 
-### Deleting a person : `delete`
+![find](images/userguide/find.png)
 
-Deletes the specified person from the address book.
+### Deleting a student : `delete`
+
+Deletes the specified student from the address book.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd student in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+
+### View your teaching schedule: `view schedule`
+
+Format: `view schedule [-w WEEKDAY] [-m MODULE_CODE] [-d DATE] [-h] [-v]`
+- `-w WEEKDAY` option shows your schedule on the `WEEKDAY`. `WEEKDAY` should be one of `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday`.
+- `-m MODULE_NAME` option shows your weekly schedule of `MODULE_CODE`.
+- `-d DATE` option shows your schedule on the `DATE`. `DATE` should comply with the format `yyyy-mm-dd`
+- `-h` option shows your schedule table in a horizontal mode (time will be columns and weekdays will be rows).
+- `-v` options shows your schedule table in a vertical mode (weekdays will be columns and time will be rows).
+- The result will be a timetable in vertical mode by default if no option is specified.
+
+Notes about the format 
+- `-w WEEKDAY` option and `-d DATE` option cannot be used at the same time.
+- If either `-w WEEKDAY`, `-m MODULE_NAME` or `-d DATE` is used, the result won't be a timetable. Instead, it will be shown as a list of slots.
+- `-h` and `-v` options can only be used when the result is shown as a timetable.
+- `-h` option and `-v` option cannot be used at the same time.
+
+Examples:
+- `view schedlue -w Monday -m CS2103T`
+
+![viewschedulemodule](images/userguide/viewschedulemodule.png)
+
+- `view schedlue -d 2022-09-12`
+
+![viewschedulemodule](images/userguide/viewscheduledate.png)
+
+- `view schedlue -h`
+
+![viewschedulemodule](images/userguide/viewschedule.png)
+
 
 ### Clearing all entries : `clear`
 
@@ -181,12 +233,15 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+| Action            | Format, Examples                                                                                                                                                                    |
+|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**           | `addstu n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] [m/MODULE]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**         | `clear`                                                                                                                                                                             |
+| **Delete**        | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                 |
+| **Edit**          | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                         |
+| **Find**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                          |
+| **List**          | `list`                                                                                                                                                                              |
+| **List Modules**  | `mlist`                                                                                                                                                                             |
+| **View Schedule** | `view schedule [-w WEEKDAY] [-m MODULE_CODE] [-d DATE] [-h] [-v]`                                                                                                                   |
+| **List**          | `list`                                                                                                                                                                              |
+| **Help**          | `help`                                                                                                                                                                              |
