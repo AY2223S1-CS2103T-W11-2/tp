@@ -25,7 +25,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Module> filteredModules;
 
-    private final FilteredList<Schedule> filteredSchedule;
+    // private final FilteredList<Schedule> filteredSchedule;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -39,7 +39,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredModules = new FilteredList<>(this.addressBook.getModuleList());
-        filteredSchedule = new FilteredList<>(this.addressBook.getScheduleList());
+        // filteredSchedule = new FilteredList<>(this.addressBook.getScheduleList());
     }
 
     public ModelManager() {
@@ -142,7 +142,7 @@ public class ModelManager implements Model {
     public void addSchedule(Schedule schedule) {
         addressBook.addSchedule(schedule);
         updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
-        updateFilteredScheduleList(PREDICATE_SHOW_ALL_SCHEDULES);
+        // updateFilteredScheduleList(PREDICATE_SHOW_ALL_SCHEDULES);
     }
 
     @Override
@@ -199,17 +199,18 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableList<Schedule> getFilteredScheduleList() {
-        ObservableList<Schedule> tempary = new FilteredList<>(this.addressBook.getScheduleList());
-        return tempary;
+        ObservableList<Schedule> temporaryList = new FilteredList<>(this.addressBook.getScheduleList());
+        return temporaryList;
+        // return filteredSchedule;
     }
 
 
-    @Override
-    public void updateFilteredScheduleList(Predicate<Schedule> predicate) {
-        requireNonNull(predicate);
-        System.out.println("1");
-        filteredSchedule.setPredicate(predicate);
-    }
+    // @Override
+    // public void updateFilteredScheduleList(Predicate<Schedule> predicate) {
+    //    requireNonNull(predicate);
+    //    System.out.println("1");
+    //    filteredSchedule.setPredicate(predicate);
+    // }
 
     @Override
     public boolean equals(Object obj) {

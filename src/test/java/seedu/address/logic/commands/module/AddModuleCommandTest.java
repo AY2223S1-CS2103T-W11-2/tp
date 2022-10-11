@@ -197,10 +197,6 @@ public class AddModuleCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override
-        public void updateFilteredScheduleList(Predicate<Schedule> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
     }
 
     /**
