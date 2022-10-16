@@ -14,9 +14,9 @@ ProfNUS is a **desktop application which helps SOC Professors who have many modu
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `ProfNUS.jar` from [here](https://github.com/AY2223S1-CS2103T-W11-2/tp/releases).
+1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your ProfNUS application.
+1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -26,7 +26,7 @@ ProfNUS is a **desktop application which helps SOC Professors who have many modu
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the ProfNUS application.
+   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
@@ -68,40 +68,24 @@ ProfNUS is a **desktop application which helps SOC Professors who have many modu
 
 Shows a message explaning how to access the help page.
 
+![help message](images/helpMessage.png)
+
 Format: `help`
 
 
-### Adding a person: `addstu`
+### Adding a person: `add`
 
-Adds a person to the module.
+Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [m/MODULE]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags or modules(including 0)
+A person can have any number of tags (including 0)
 </div>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Adam Doink t/TA e/ad4md01nk@example.com a/Kent Ridge Hall p/1234567 m/CS1101S`
-
-![addstu](images/userguide/addstu.png)
-
-### Adding a module: `madd`
-
-Adds a module to the address book.
-
-Format: `madd n/MODULE NAME c/MODULE CODE d/MODULE DESCRIPTION [t/TAG]…​ `
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags or modules(including 0)
-</div>
-
-Examples:
-* `madd n/Introduction to SWE c/CS2103T d/Teach students SWE principles and practices t/ModuleCoordinator`
-* `madd n/Introduction to Cybersecurity c/CS2107 d/Cryptography practices t/IMPT t/URGENT`
-
-![madd](images/userguide/madd.png)
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
 ### Listing all students : `list`
 
@@ -121,7 +105,7 @@ Examples:
 
 ### Viewing list of modules : `mlist`
 
-Shows a list of all modules in the ProfNUS application.
+Shows a list of all modules in the address book.
 
 ![mlist](images/userguide/mlist.png)
 
@@ -130,7 +114,7 @@ Format: `mlist`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the ProfNUS application.
+Edits an existing person in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -165,7 +149,7 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the ProfNUS application.
+Deletes the specified person from the address book.
 
 Format: `delete INDEX`
 
@@ -174,23 +158,12 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the list of students.
+* `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-### Deleting a module: `mdel`
-
-Deletes a module stored in the address book.
-
-Format: `mdel c/MODULE CODE`
-
-Examples:
-* `mdel c/CS2103T`
-
-![mdel](images/userguide/mdel.png)
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the ProfNUS application.
+Clears all entries from the address book.
 
 Format: `clear`
 
@@ -202,17 +175,73 @@ Format: `exit`
 
 ### Saving the data
 
-ProfNUS data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Viewing your teaching schedule
-ProfNUS data are saved as a JSON file `[JAR file location]/data/profnus.json`. Advanced users are welcome to update data directly by editing that data file.
+### Editing the data file
+
+AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, ProfNUS will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
+### Add a teaching schedule `sadd`
+
+Adds a schedule of a module in the adressbook. 
+
+**Format**: `sadd m/MODULE_CODE w/WEEKDAY ct/PERIOD cc/CLASS_TYPE cv/VENUE `
+
+- Adds a schedule with the module it belongs to, the weekday, the time period, the type of the class, and the venue.
+- `MODULE_CODE` needs to abide by the [Module Code Format of NUS ](https://www.nus.edu.sg/registrar/docs/info/nusbulletin/AY201213_GeneralInformation.pdf) 
+- The `WEEKDAY` should be one of `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday`.
+- The `PERIOD` includes the start time and the end time which are both in the format of the *modern 24-hour clock*.
+- The `CLASS_TYPE` should be one of `lec`, `tut`, `lab`, and `rec`, which represent lecture, tutorial, laborartory, and reflection respectively.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Please make sure you have added the module with `MODULE_CODE` before you add any schedules with `MODULE_CODE`. Otherwise, address book will consider the command to be invalid.
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If the schedule to be added conflicts with any existing schedule, the address book will not perform any operation.
+</div>
+**Example**: `sadd m/CS2103T w/Friday ct/16:00-18:00 cc/lec cv/I3-AUD`
+
+<img src="images/userguide/sadd.png" alt="Screenshot 2022-10-16 at 2.30.31 PM" style="zoom: 50%;" width=1200px/>
+
+
+
+### Edit a schedule `sedit`
+
+Edits a schedule in the adressbook. 
+
+**Format**: `sedit INDEX [m/MODULE_CODE] [w/WEEKDAY] [ct/PERIOD] [cc/CLASS_TYPE] [cv/VENUE] `
+
+- The `INDEX` needs to be a positive integer and refers to the index number shown in the displayed schedule list.
+- At least one of the optional fields must be provided.
+- All optional fileds must abide by the requirements given in the feature ***Add a schedule `sadd`***, if any.
+
+**Example**: `sedit 1 w/Monday ct/18:00-20:00`
+
+<img src="images/userguide/sedit.png" alt="sedit" style="zoom:67%;" width=1000px/>
+
+
+
+### Delete a schedule `sdelete`
+
+Deletes a schedule from the address book.
+
+**Format**: `sdelete INDEX`
+
+- The `INDEX` needs to be a positive integer and refers to the index number shown in the displayed schedule list.
+
+**Example**: `sdelete 1`
+
+
+
 ### View your teaching schedule: `view schedule`
 
-**Syntax**: `view schedule [-w WEEKDAY] [-m MODULE_CODE] [-d DATE] [-h] [-v]`
+Views the teaching schedule that have been added to the address book.
+
+**Format**: `view schedule [-w WEEKDAY] [-m MODULE_CODE] [-d DATE] [-h] [-v]`
 
 - `-w WEEKDAY` option shows your schedule on the `WEEKDAY`. `WEEKDAY` should be one of `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday`.
 - `-m MODULE_NAME` option shows your weekly schedule of `MODULE_CODE`.
@@ -242,25 +271,6 @@ If your changes to the data file makes its format invalid, ProfNUS will discard 
 
   <div align=center><img src="./images/view schedule -h.png" width=500px height=250px></div>
 
-### Finding a student
-
-Finds a student based on some keywords, with all information showing up.
-
-Format: `find keyword`
-
-
-**Tip:** Keyword  person can have any number of tags or modules (including 0).
-
-**Tip:** The result is a list of persons which keywords matching with their name, phone number or email.
-
-**Example** 
-
-
-- `find Adam Do`
-
-  <div align=center><img src="./images/find Adam Do.png" width="500px"></div>
-
-
 
 
 ### Archiving data files `[coming in v2.0]`
@@ -272,25 +282,18 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ProfNUS home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-
 ## Command summary
 
-| Action                     | Format                                                               | Example                                                                                                                                                                     |
-|----------------------------|----------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| add a person               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [m/MODULE]…​` | `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` <br> `add n/Adam Doink t/TA e/ad4md01nk@example.com a/Kent Ridge Hall p/1234567 m/CS1101S` |
-| edit a person              | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`      | `edit 1 p/91234567 e/johndoe@example.com` <br> `edit 2 n/Betsy Crower t/`                                                                                                   |
-| delete a person            | `delete INDEX`                                                       | `delete 1`                                                                                                                                                                  |
-| clear                      | `clear`                                                              | `clear`                                                                                                                                                                     |
-| add a module               | `madd`                                                               | `madd CS2100`                                                                                                                                                               |
-| list modules               | `list MODULE_NAME [MORE_MODULE_NAMES]`                               | `list CS1101S` <br>`list CS1101S CS1231S`                                                                                                                                   |
-| list all modules           | `mlist`                                                              | `mlist`                                                                                                                                                                     |
-| view the teaching schedule | `view schedule [-w WEEKDAY] [-m MODULE_CODE] [-d DATE] [-h] [-v]`    | `view schedule -w Monday -m CS2103T` <br>`view schedule -d 2022-09-12` <br> `view schedule -h`                                                                              |
-| find a person              | `find KEYWORD [MORE_KEYWORD]`                                        | `find Adam Do`                                                                                                                                                              |
-| help                       | `help`                                                               | `help`                                                                                                                                                                      | 
-| exit                       | `exit`                                                               | `exit`                                                                                                                                                                      | 
-
-
+Action | Format, Examples
+--------|------------------
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Clear** | `clear`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**List** | `list`
+**Help** | `help`
