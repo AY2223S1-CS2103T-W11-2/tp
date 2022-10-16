@@ -235,6 +235,8 @@ Deletes a schedule from the address book.
 
 **Example**: `sdelete 1`
 
+<img src="images/userguide/sdelete.png" alt="sdelete" style="zoom:67%;" width=1000px/>
+
 
 
 ### View your teaching schedule: `view schedule`
