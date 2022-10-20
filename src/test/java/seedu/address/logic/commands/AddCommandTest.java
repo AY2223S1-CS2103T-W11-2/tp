@@ -21,7 +21,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.module.Module;
-import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.schedule.Schedule;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
@@ -176,11 +175,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public void clearSchedules(ArrayList<ModuleCode> keywords) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void setPerson(Person target, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
@@ -216,22 +210,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Person> getAllPersonList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ObservableList<Student> getFilteredTutorList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ObservableList<Module> getFilteredModuleList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Module> getAllModuleList() {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.schedule;
+package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_OF_SCHEDULE;
@@ -6,15 +6,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEKDAY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.module.schedule.ScheduleContainsKeywordsPredicate;
 
 /**
- * Views all schedules which satisfies selection requirements.
+ * Views all slots in the schedule which satisfies selection requirements
  */
-public class ViewScheduleCommand extends Command {
+public class ViewModuleScheduleCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
 
@@ -27,17 +25,16 @@ public class ViewScheduleCommand extends Command {
 
     private final ScheduleContainsKeywordsPredicate predicate;
 
-    public ViewScheduleCommand() {
+    public ViewModuleScheduleCommand() {
         this.predicate = null;
     }
 
-    public ViewScheduleCommand(ScheduleContainsKeywordsPredicate predicate) {
+    public ViewModuleScheduleCommand(ScheduleContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
-
         requireNonNull(model);
         if (this.predicate == null) {
             model.updateFilteredScheduleList(PREDICATE_SHOW_ALL_SCHEDULES);
@@ -54,8 +51,8 @@ public class ViewScheduleCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this
-                || (other instanceof ViewScheduleCommand
-                && predicate.equals(((ViewScheduleCommand) other).predicate));
+                || (other instanceof ViewModuleScheduleCommand
+                && predicate.equals(((ViewModuleScheduleCommand) other).predicate));
     }
 
 }
