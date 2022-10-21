@@ -62,12 +62,12 @@ public class SampleDataUtil {
 
     public static Module[] getSampleModules() {
         return new Module[] {
-                new Module(new ModuleName("Programming Methodology 1"), new ModuleCode("CS1101S"),
-                        new ModuleDescription("Intro mod"), getTagSet("Fun"), new ArrayList<>()),
-                new Module(new ModuleName("Programming Methodology 2"), new ModuleCode("CS2030S"),
-                        new ModuleDescription("Continued mod"), getTagSet("Fun"), new ArrayList<>()),
-                new Module(new ModuleName("Data Structure and Algos"), new ModuleCode("CS2040S"),
-                        new ModuleDescription("Intro mod"), getTagSet("Fun"), new ArrayList<>()),
+            new Module(new ModuleName("Programming Methodology 1"), new ModuleCode("CS1101S"),
+                    new ModuleDescription("Intro mod"), getTagSet("Fun"), new ArrayList<>()),
+            new Module(new ModuleName("Programming Methodology 2"), new ModuleCode("CS2030S"),
+                    new ModuleDescription("Continued mod"), getTagSet("Fun"), new ArrayList<>()),
+            new Module(new ModuleName("Data Structure and Algos"), new ModuleCode("CS2040S"),
+                    new ModuleDescription("Intro mod"), getTagSet("Fun"), new ArrayList<>()),
         };
     }
 
